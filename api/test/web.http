@@ -1,0 +1,24 @@
+@url=http://localhost:4000
+
+###
+GET {{url}}
+
+###
+POST {{url}}/api/login
+Content-Type: application/json
+
+{
+    "mssv": "21013481",
+    "birthday": "01122003"
+}
+
+###
+POST {{url}}/api/row
+Content-Type: application/json
+
+{   
+    "page": "653142e277d81168d3e564ab",
+    "user": "6530d1ca2c71b6bba1677bc8",
+    "table": "653142e277d81168d3e564ac",
+    "content": "['123', 'xyz', 'abc']"
+}

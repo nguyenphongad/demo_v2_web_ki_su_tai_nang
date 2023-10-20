@@ -1,0 +1,118 @@
+.container__login {
+    width: 100%;
+    position: relative;
+    .header__box_introduce {
+        width: 100%;
+        height: 80px;
+        background-color: red;
+    }
+
+    .flex__layout {
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+        > div {
+            width: 100%;
+        }
+        .box__form {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .footer__form {
+                text-align: center;
+                > div:first-child {
+                    @include flex_center;
+                    flex-direction: column;
+                }
+                .text_heading_prt {
+                    display: none;
+                }
+                .img_intro {
+                    display: none;
+                }
+            }
+            .set__size__header {
+                width: 100%;
+                background-color: #f8f8f8;
+                border-bottom: 1px solid #c6c6c6;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                // padding:10px 20px;
+            }
+            .form_group {
+                max-width: 500px;
+                height: 100%;
+                padding: 15px 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                form > div {
+                    margin-bottom: 10px;
+                }
+                .heading_text--login {
+                    font-size: 27px;
+                    font-weight: 600;
+                    margin: 10px 0px;
+                    text-align: center;
+                }
+                .tr__flex {
+                    display: flex;
+                    justify-content: space-between;
+                    .check__box--remb {
+                        @include flex_center;
+                        font-weight: 600;
+                        font-size: 15px;
+                        color: #282c52;
+                        > input {
+                            margin-right: 5px;
+                        }
+                    }
+                    .btn_prm_password {
+                        color: $main_color;
+                    }
+                }
+                .btn__submit--login {
+                    width: 100%;
+                    display: block;
+                    background-color: $main_color;
+                    padding: 12px 0px;
+                    border: none;
+                    margin: 20px 0px;
+                    font-size: 18px;
+                    color: $color_white;
+                    font-weight: 600;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: all 0.5s;
+                    &:hover {
+                        background-color: $main_color_hover;
+                    }
+                }
+            }
+        }
+        .box_intro {
+            .width__img--intro {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                > img {
+                    width: 100%;
+                    height: 100%;
+                }
+                .box_text_present {
+                    height: 100%;
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    padding: 50px;
+                    .text_heading_prt {
+                        font-size: 34px;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+}
