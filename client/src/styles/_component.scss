@@ -1,4 +1,5 @@
 .container__app {
+
     // background-color: rgb(106, 80, 80);
     .box_layout_body {
         height: auto;
@@ -31,13 +32,16 @@
     .tr__header {
         height: 100%;
         padding: 5px 10px;
+
         .flex__line {
             height: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             .box_search {
                 height: 35px;
+
                 svg {
                     color: #6b6b6b;
                     font-size: 19px;
@@ -48,15 +52,18 @@
                 height: 100%;
                 display: flex;
                 align-items: center;
-                > div {
+
+                >div {
                     margin-left: 20px;
                 }
+
                 .btn__noti {
                     font-size: 28px;
                     @include flex_center;
                     cursor: pointer;
                     color: #6b6b6b;
                     position: relative;
+
                     .length__noti {
                         svg {
                             position: absolute;
@@ -67,6 +74,7 @@
                         }
                     }
                 }
+
                 .border__account {
                     width: 40px;
                     height: 40px;
@@ -74,10 +82,12 @@
                     border-radius: 100%;
                     padding: 1px;
                     position: relative;
+
                     .btn_dropdown {
                         width: 100%;
                         height: 100%;
                         cursor: pointer;
+
                         img {
                             width: 100%;
                             height: 100%;
@@ -85,6 +95,7 @@
                             user-select: none;
                         }
                     }
+
                     .box__drop--account {
                         width: max-content;
                         position: absolute;
@@ -94,8 +105,10 @@
                         border: 1px solid #cecece;
                         border-radius: 10px;
                         box-shadow: 3px 2px 8px 0 #0000002c;
+
                         .pd__select {
                             padding: 8px;
+
                             &::after {
                                 background-color: #fff;
                                 border: 1px solid #ddd4dafd;
@@ -113,6 +126,7 @@
                                 width: 15px;
                             }
                         }
+
                         .item_btn_control {
                             @include flex_center;
                             justify-content: left;
@@ -123,22 +137,26 @@
                             transition: background-color 0.35s;
                             border-radius: 10px;
                             margin: 10px 0px;
+
                             &:hover {
                                 background-color: $color_white_hover;
                             }
-                            > svg {
+
+                            >svg {
                                 margin-right: 15px;
                                 margin-left: 10px;
                                 font-size: 24px;
                             }
                         }
                     }
+
                     .active_drop_box {
                         opacity: 1;
                         transform: translateY(0);
                         transition: 0.3s ease;
                         visibility: visible;
                     }
+
                     .unactive_drop_box {
                         opacity: 0;
                         transform: translateY(-8px);
@@ -159,18 +177,22 @@
     position: fixed;
     left: 0px;
     z-index: 9999;
+
     .img__logo {
         text-align: center;
         padding: 8px 0px;
+
         img {
             width: 130px;
         }
     }
+
     .wrap__menu {
         padding: 10px 0px;
         height: 100vh;
         overflow: auto;
         padding-bottom: 100px;
+
         .flex__box {
             display: flex;
             flex-direction: column;
@@ -191,7 +213,7 @@
                 margin: 6px 10px;
                 color: #383838;
 
-                > span {
+                >span {
                     @include flex_center;
                 }
 
@@ -209,7 +231,7 @@
                 .active_icon {
                     transform: rotate(90deg);
 
-                    > svg {
+                    >svg {
                         color: $color_black !important;
                     }
                 }
@@ -261,7 +283,7 @@
 }
 
 .component__input {
-    > label {
+    >label {
         font-size: 18px;
         font-weight: 500;
         color: #282c52;
@@ -275,7 +297,7 @@
         border: 1px solid #cecece;
         border-radius: 5px;
 
-        > input {
+        >input {
             width: 100%;
             height: 100%;
             border-radius: 5px;
@@ -294,7 +316,7 @@
             right: 0px;
             @include flex_center;
 
-            > svg {
+            >svg {
                 font-size: 25px;
                 color: #282c52;
                 margin: 0px 5px;
@@ -308,11 +330,11 @@
     display: flex;
     width: 100%;
 
-    > div:first-child {
+    >div:first-child {
         flex: 3;
     }
 
-    > div:last-child {
+    >div:last-child {
         flex: 7;
     }
 
@@ -325,4 +347,16 @@
             cursor: pointer;
         }
     }
+}
+
+
+//Modal
+
+
+.ReactModal__Content {
+    .modal__title {
+        font-size: 30px;
+        font-weight: bold !important;
+    }
+
 }

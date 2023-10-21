@@ -32,8 +32,8 @@ $avatar_size: 185px;
 .container__info {
 	background-color: $color_white;
 	padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 3px rgb(194, 193, 193);
+	border-radius: 5px;
+	box-shadow: 0 0 3px rgb(194, 193, 193);
 }
 
 
@@ -136,60 +136,6 @@ $avatar_size: 185px;
 .container__center {
 	background-color: $color_white;
 	padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 3px rgb(194, 193, 193);
-
-	.container__table {
-		width: 100%;
-
-		header {
-			border-bottom: 1px solid $line_color;
-
-		}
-
-		.table {
-			border: 1px solid $line_color;
-			margin: 10px 0px;
-
-			width: 100%;
-			border-radius: 5px;
-
-			[class^="table__line"] {
-				padding: 5px 10px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				gap: 10px;
-				margin: 0 auto;
-				text-align: center;
-
-
-				&:not(:last-child) {
-					border-bottom: 1px solid $line_color;
-
-				}
-			}
-
-			.table__line__header {
-				.header__item {
-					padding: 10px;
-					font-weight: 700;
-					margin: 0 auto;
-					width: 100%;
-				}
-			}
-
-			.table__items {
-				.table__line__item {
-
-					.line__item {
-						padding: 10px;
-						width: 100%;
-						color: $color_gray-500;
-					}
-				}
-			}
-		}
-
-	}
-}
+	border-radius: 5px;
+	box-shadow: 0 0 3px rgb(194, 193, 193);
+}	
