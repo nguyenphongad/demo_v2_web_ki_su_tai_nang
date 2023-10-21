@@ -15,7 +15,7 @@ const MainItem = ({ data }) => {
 }
 
 const LayoutTable = ({ row, title, thead }) => {
-	const [useStateModal, setUseStateModal] = useState(false);
+	const [useStateModal, setUseStateModal] = useState(true)
 
 	return (
 		<div className="container__table">
@@ -23,7 +23,12 @@ const LayoutTable = ({ row, title, thead }) => {
 				<div className="heading-4">{title}</div>
 				<div className="modal">
 					<button onClick={() => setUseStateModal(true)}>open</button>
-					<ComponentModal stateModal={useStateModal} setStateModal={setUseStateModal} />
+					<ComponentModal
+						stateModal={useStateModal}
+						setStateModal={setUseStateModal}
+						title={title}
+						thead={thead}
+					/>
 				</div>
 			</header>
 
@@ -32,16 +37,16 @@ const LayoutTable = ({ row, title, thead }) => {
 					<tr className="table__line__header">
 						{thead.map((item, index) => (
 							<th className="header__item" key={index}>
-								{item}
+								{item.textHeading}
 							</th>
 						))}
 					</tr>
 				</thead>
-				<tbody className="table__items">
+				{/* <tbody className="table__items">
 					{row.map((item) => (
 						<MainItem data={item} key={item.stt} />
 					))}
-				</tbody>
+				</tbody> */}
 			</table>
 		</div>
 	)

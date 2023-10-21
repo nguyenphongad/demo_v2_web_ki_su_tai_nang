@@ -6,8 +6,7 @@ import Layout from './components/Layout/Layout'
 import Home from './pages/Home'
 import PageRender from './config/routes/PageRender'
 import { useEffect } from 'react'
-import Modal from 'react-modal'
-Modal.setAppElement('#root')
+
 
 const App = () => {
 	const dispatch = useDispatch()
