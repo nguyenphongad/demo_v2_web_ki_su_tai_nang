@@ -136,7 +136,7 @@ const LayoutSideBar = () => {
 
     const renderArrMenu = ARRAY_LIST_MENU.map((item) => {
         return (
-            <React.Fragment key={item}>
+            <React.Fragment key={item.id}>
                 {
                     item.submenu ?
                         <div

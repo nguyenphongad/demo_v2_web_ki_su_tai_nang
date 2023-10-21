@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ComponentModal from '../ComponentModal/ComponentModal'
 
 const MainItem = ({ data }) => {
@@ -15,12 +15,15 @@ const MainItem = ({ data }) => {
 }
 
 const LayoutTable = ({ row, title, thead }) => {
+	const [useStateModal, setUseStateModal] = useState(false);
+
 	return (
 		<div className="container__table">
 			<header>
 				<div className="heading-4">{title}</div>
 				<div className="modal">
-					<ComponentModal />
+					<button onClick={() => setUseStateModal(true)}>open</button>
+					<ComponentModal stateModal={useStateModal} setStateModal={setUseStateModal} />
 				</div>
 			</header>
 
