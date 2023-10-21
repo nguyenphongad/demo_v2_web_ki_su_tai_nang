@@ -34,12 +34,12 @@ const TopHeader = () => {
                     </div>
                     <div className="box__control">
                         <div className="btn__noti">
-                            <IoNotificationsSharp />
-                            <div className="length__noti">
-                                <Link to="/notification">
+                            <Link to="/notification">
+                                <IoNotificationsSharp />
+                                <div className="length__noti">
                                     <BsDot />
-                                </Link>
-                            </div>
+                                </div>
+                            </Link>
                         </div>
                         <div className="border__account" ref={refBoxAccount}>
                             <div className="btn_dropdown" onClick={() => setDropBoxAccount(!dropBoxAccount)}>
@@ -49,7 +49,7 @@ const TopHeader = () => {
                                 className={`box__drop--account ${dropBoxAccount ? "active_drop_box" : "unactive_drop_box"}`}
                             >
                                 <div className="pd__select">
-                                    <ControlBoxAccount/>
+                                    <ControlBoxAccount setState={setDropBoxAccount} />
                                 </div>
                             </div>
                         </div>

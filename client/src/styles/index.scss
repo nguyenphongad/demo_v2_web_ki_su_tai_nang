@@ -41,7 +41,9 @@ a {
     background-color: #979797;
     border-radius: 0px;
 }
-
+.text-danger {
+    color: $color_danger !important;
+}
 @import "component";
 @import "pages";
 @import "pageHome";
@@ -49,9 +51,7 @@ a {
 @import "pagePlan";
 @import "layout";
 @import "table";
+@import "pageProfile";
 
 @import "@media/@mediaComponentLogin.scss";
 
-.text-danger {
-    color: $color_danger !important;
-}
