@@ -12,6 +12,7 @@
 }
 
 body {
+
     margin: 0px;
     padding: 0px;
     background-color: $color_white;
@@ -27,6 +28,7 @@ a {
     color: $color_gray-500;
     padding: 10px 20px;
 }
+
 ::-webkit-scrollbar {
     width: 6px;
 }
@@ -44,7 +46,9 @@ a {
 @import "pages";
 @import "pageHome";
 @import "pageNews";
+@import "pagePlan";
 @import "layout";
+@import "table";
 
 @import "@media/@mediaComponentLogin.scss";
 
