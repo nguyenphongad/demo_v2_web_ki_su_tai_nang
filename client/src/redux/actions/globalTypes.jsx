@@ -1,0 +1,13 @@
+const GLOBALTYPES = {
+    AUTH: {
+        SET_INFO_LOGIN: 'SET_INFO_LOGIN'
+    },
+    ALERT: 'ALERT',
+    PAGE: {
+        SET_DYNAMIC_PAGE: 'SET_DYNAMIC_PAGE',
+        GET_DYNAMIC_PAGES: 'GET_DYNAMIC_PAGES',
+        DYNAMIC_PAGE_INFO: 'DYNAMIC_PAGE_INFO'
+    }
+};
+
+export default GLOBALTYPES;
