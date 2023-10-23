@@ -10,29 +10,37 @@ import { useEffect } from 'react';
 import { authSelector } from './redux/selector';
 import { verifyAccessToken } from './redux/actions/authAction';
 import Alert from './components/ComponentToast/Alert';
-import FirstLogin from './components/ComponentFirstLoggin/FirstLoggin';
+import FirstLogin from './components/ComponentFirstLogin/FirstLogin';
+import GLOBALTYPES from './redux/actions/globalTypes';
 const App = () => {
     const dispatch = useDispatch();
     const auth = useSelector(authSelector);
     const location = useLocation();
     const pathName = location.pathname;
 
-    useEffect(() => {
-        dispatch(verifyAccessToken());
-        if (pathName.includes('/page/')) {
-            getDataApi(`${decodeURI(pathName)}`)
-                .then((res) => {
-                    dispatch({
-                        type: GLOBALTYPES.PAGE.DYNAMIC_PAGE_INFO,
-                        payload: {
-                            pageName: res.data.data?.pageName,
-                            tables: res.data.data.tables
-                        }
+    useEffect(() => { 
+        if(auth?.user) {
+            dispatch(verifyAccessToken());
+            if (pathName.includes('/page/')) {
+                getDataApi(`${decodeURI(pathName)}`)
+                    .then((res) => {
+                        dispatch({
+                            type: GLOBALTYPES.PAGE.DYNAMIC_PAGE_INFO,
+                            payload: {
+                                pageName: res.data.data?.pageName,
+                                tables: res.data.data.tables
+                            }
+                        });
+                    })
+                    .catch((e) => {
+                        dispatch({
+                            type: GLOBALTYPES.ALERT,
+                            payload: {
+                                error: 'Chuyển Trang Thất Bại'
+                            }
+                        })
                     });
-                })
-                .catch((e) => {
-                    console.log(e);
-                });
+            }
         }
     }, []);
 

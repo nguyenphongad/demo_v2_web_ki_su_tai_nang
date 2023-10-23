@@ -69,6 +69,7 @@ const LayoutInfo = ({ children }) => {
 				<div className="info__text">
 					<LineItem info="MSSV" text={auth?.user?.studentId || 'Chưa cập nhật'} />
 					<LineItem info="Họ và tên" text={auth?.user?.fullName || 'Chưa cập nhật'} />
+                    <LineItem info="Ngày sinh" text={(new Date(auth?.user.birthday)).toLocaleDateString('en-GB') || 'Chưa cập nhật'} />
 					<LineItem info="Khoa" text={auth?.user?.major || 'Chưa cập nhật'} />
 					<LineItem info="Email" text={auth?.user?.email || 'Chưa cập nhật'} />
 				</div>

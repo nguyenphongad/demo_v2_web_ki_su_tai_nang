@@ -31,7 +31,6 @@ export const login = ({
 
         setLogged();
     } catch (error) {
-        console.log(error);
         dispatch({
             type: GLOBALTYPES.ALERT,
             payload: {error: error.reponse?.data.msg || 'Đăng Nhập Thất Bại'}
@@ -61,7 +60,7 @@ export const register = (data) => async(dispatch) => {
                 success: res.data.status
             }
         });
-
+        setLogged();
     } catch (error) { 
         dispatch({
             type: GLOBALTYPES.ALERT,
@@ -109,7 +108,8 @@ export const verifyAccessToken = () => async (dispatch) => {
             type: GLOBALTYPES.AUTH.SET_INFO_LOGIN,
             payload: res.data
         });
-
+        
+        setLogged();
     } catch (error) {
         if(getLogged()) {
             removeLogged();
