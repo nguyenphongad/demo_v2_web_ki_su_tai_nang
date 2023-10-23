@@ -26,6 +26,10 @@ const UserSchema = new Schema(
             type: String,
             required: true
         },
+        roles: {
+            type: Array,
+            default: []
+        },
         email: String,
         phone: String
     },

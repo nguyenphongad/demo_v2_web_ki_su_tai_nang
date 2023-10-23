@@ -2,6 +2,13 @@ const fetch = require('node-fetch');
 const User = require('../models/user.model');
 const moment = require('moment');
 
+const role = {
+    engineer: '0001',
+    talentedEngineer: '0002',
+    contentAdministrator: '0003',
+    webStructureAdministrator: '0004'
+};
+
 class AccessService {
     static login = async (data) => {
         try {
@@ -66,24 +73,24 @@ class AccessService {
                 studentId,
                 fullName,
                 password,
-                birthday: moment(birthday, 'DD-MM-YYYY').toDate(),
+                birthday: moment(birthday, 'DD/MM/YYYY').toDate(),
                 major,
                 email,
-                phone
+                phone,
+                roles: [role.engineer]
             });
 
             await createdUser.save();
 
             return createdUser;
         } catch (error) {
-            console.log(error);
             throw error;
         }
     };
 
     static getUserInfo = async (userId) => {
         try {
-            const user = await User.findById(userId).lean();
+            const user = await User.findById(userId).select('-password').lean();
             return user;
         } catch (error) {
             throw error;

@@ -54,12 +54,13 @@
                 .heading_text--login {
                     font-size: 27px;
                     font-weight: 600;
-                    margin: 10px 0px;
+                    margin: 30px 0px;
                     text-align: center;
                 }
                 .tr__flex {
                     display: flex;
                     justify-content: space-between;
+                    align-items: center;
                     .check__box--remb {
                         @include flex_center;
                         font-weight: 600;
@@ -67,10 +68,13 @@
                         color: #282c52;
                         > input {
                             margin-right: 5px;
+                            position: relative;
+                            top: 1px;
                         }
                     }
                     .btn_prm_password {
                         color: $main_color;
+                        margin-left: 20px;
                     }
                 }
             }

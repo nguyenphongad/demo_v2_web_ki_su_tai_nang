@@ -48,7 +48,8 @@ class AccessControllers {
                         status: 'Đăng nhập thành công',
                         data: {
                             firstLogin: {
-                                mssv: req.body.studentId
+                                studentId: req.body.studentId,
+                                birthday: req.body.password
                             }
                         }
                     });

@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom';
 import LayoutSideBar from '../ComponentMenu/LayoutSideBar';
 import TopHeader from '../ComponentHeader/TopHeader';
-function Layout() {
+function Layout({auth}) {
     return (
         <>
             <div className='wrap__layout'>
-                <LayoutSideBar />
+                <LayoutSideBar auth={auth}/>
                 <div className='main__body'>
                     <main>
                         <TopHeader />

@@ -1,5 +1,6 @@
 import React from 'react'
 import { NewsItem } from '../components/ComponentNews/NewsItem'
+import { useState } from 'react'
 const News = () => {
 	const ARRAY_NEWS = [
 		{
@@ -37,6 +38,7 @@ const News = () => {
 		return <NewsItem key={index}>{item}</NewsItem>
 	})
 
+    const [title, setTitle] = useState('');
 	return (
 		<div className="pageNews">
 			<header className="heading-4">Tin tức - Sự kiện</header>

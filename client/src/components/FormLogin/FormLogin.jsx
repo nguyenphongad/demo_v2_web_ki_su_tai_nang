@@ -2,7 +2,6 @@ import React, {useState } from 'react'
 import ComponentInput from '../ComponentForm/ComponentInput';
 import { RiAccountCircleFill } from 'react-icons/ri'
 import { BiSolidLock } from 'react-icons/bi'
-import { MdOutlineSettingsBackupRestore } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/actions/authAction';
@@ -13,15 +12,6 @@ const FormLogin = () => {
     const dispatch = useDispatch();
     const [studentId, setStudentId] = useState('');
     const [password, setPassword] = useState('');
-
-    console.log({
-        studentId,
-        password
-    })
-    
-    const handleRefeshCapcha = () => {
-        alert("refresh capcha")
-    }
 
     const handleChangeStudentId = (e) => {
         setStudentId(e.target.value);
@@ -61,21 +51,7 @@ const FormLogin = () => {
                         value={password}
                         onChange={handleChangePassword}
                     />
-                    <ComponentInput
-                        label="Mã bảo mật"
-                        type="text"
-                        id="capcha"
-                        classNameWrap="tr__line--capcha"
-                    >
-                        <ComponentInput
-                            type="text"
-                            id="btn_rf_capcha"
-                            iconBefore={<MdOutlineSettingsBackupRestore onClick={handleRefeshCapcha} />}
-                            className="set_width"
-                            disabled={true}
-                        >
-                        </ComponentInput>
-                    </ComponentInput>
+
                     <div className="tr__flex">
                         <div className="check__box--remb">
                             <input type="checkbox" id="remember_account" defaultChecked />

@@ -3,7 +3,6 @@ import { IoCloseOutline } from 'react-icons/io5'
 import ComponentInput from '../ComponentForm/ComponentInput'
 
 const ComponentModal = ({ stateModal, setStateModal, title, thead }) => {
-	console.log(thead)
 	let refBoxModal = useRef()
 	useEffect(() => {
 		let hanlder = (e) => {

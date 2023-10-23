@@ -3,8 +3,11 @@ import LayoutInfo from '../components/ComponentHome/LayoutInfo'
 import LayoutChart from '../components/ComponentHome/LayoutChart'
 import avatar from '../assets/avatar.png'
 import LayoutTable from '../components/ComponentTable/LayoutTable'
+import ApplyComponent from '../components/ComponentHome/ApplyComponent'
+import CreatedNewsHistory from '../components/ComponentHome/CreatedNewsHistory'
+import ChangeWebsiteHistory from '../components/ComponentHome/ChangeWebsiteHistory'
 
-const Home = () => {
+const Home = ({ auth }) => {
 	const DATA_INFO = {
 		image: avatar,
 		mssv: 21000991,
@@ -96,7 +99,13 @@ const Home = () => {
 		<div className="pageHome">
 			<div className="container__top">
 				<LayoutInfo>{DATA_INFO}</LayoutInfo>
-				<LayoutChart>{DATA_CHART}</LayoutChart>
+                <>
+                    {((auth?.user.roles.includes("0001") && auth?.user.roles.length === 1) || (auth?.user.roles.length === 0)) && <ApplyComponent />}
+                    {auth?.user.roles.includes("0002") && <LayoutChart>{DATA_CHART}</LayoutChart>}
+                    {auth?.user.roles.includes("0003") && <CreatedNewsHistory />}
+                    {auth?.user.roles.includes("0004") &&  <ChangeWebsiteHistory />}
+                </>
+				
 			</div>
 			<div className="container__center">
 				{DATA_TABLE.map((item, index) => {

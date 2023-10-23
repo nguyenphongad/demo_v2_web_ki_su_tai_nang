@@ -12,6 +12,7 @@ import { verifyAccessToken } from './redux/actions/authAction';
 import Alert from './components/ComponentToast/Alert';
 import FirstLogin from './components/ComponentFirstLogin/FirstLogin';
 import GLOBALTYPES from './redux/actions/globalTypes';
+import { getLogged } from './utils/handleLogged';
 const App = () => {
     const dispatch = useDispatch();
     const auth = useSelector(authSelector);
@@ -19,7 +20,7 @@ const App = () => {
     const pathName = location.pathname;
 
     useEffect(() => { 
-        if(auth?.user) {
+        if(auth?.user || getLogged()) {
             dispatch(verifyAccessToken());
             if (pathName.includes('/page/')) {
                 getDataApi(`${decodeURI(pathName)}`)
@@ -49,8 +50,10 @@ const App = () => {
         <Alert />
         <Routes>
             <Route path='/login' element={<Login />} />
-            <Route path='/' element={auth?.user ? <Layout /> : auth?.firstLogin ? <FirstLogin studentId={auth.firstLogin.mssv}/> : <Login />}>
-                <Route index element={<Home />} />
+            <Route path='/' 
+                element={auth?.user ? <Layout auth={auth} /> : auth?.firstLogin ? 
+                <FirstLogin studentId={auth.firstLogin.studentId} birthday={auth.firstLogin.birthday}/> : <Login />}>
+                <Route index element={<Home auth={auth} />} />
                 <Route path='/:page' element={<PageRender />} />
                 <Route path='/:page/:id' element={<PageRender />} />
                 <Route path='/page/:dynamicPage' element={<PageRender />} />

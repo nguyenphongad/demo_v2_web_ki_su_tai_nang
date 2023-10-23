@@ -1,7 +1,7 @@
 import React from 'react'
 import LayoutTable from '../components/ComponentTable/LayoutTable'
 
-const Plan = () => {
+const DynamicPage = () => {
 	const DATA_ROW = [
 		{
 			_id: 0,
@@ -97,4 +97,4 @@ const Plan = () => {
 	)
 }
 
-export default Plan
+export default DynamicPage

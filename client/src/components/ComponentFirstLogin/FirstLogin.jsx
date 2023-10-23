@@ -14,26 +14,21 @@ export const createNumberOption = (startNumber, endNumber) => {
     return options;
 }
 
-function FirstLogin({studentId}) {
-
+function FirstLogin({studentId, birthday}) {
     const dispatch = useDispatch();
-
     const [data, setData] = useState({});
-    const [day, setDay] = useState(null);
-    const [month, setMonth] = useState(null);
-    const [year, setYear] = useState(null);
-    console.log(data);
+    const formattedBirthday = `${birthday.substr(0, 2)}/${birthday.substr(2, 2)}/${birthday.substr(4)}`;
+    
     const handleChangeData = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
     }
 
-    console.log(`${day}-${month}-${year}`);
     const handleSumbitForm = (e) => {
         e.preventDefault();
         dispatch(register({
             ...data,
             studentId,
-            birthday: `${day}-${month}-${year}`
+            birthday: formattedBirthday
         }));
     }
 
@@ -65,31 +60,13 @@ function FirstLogin({studentId}) {
                         name="studentId"
                         readonly
                         value={studentId}
-                        onChange={handleChangeData}
                     />
-                    <div className="tr__line__row--birth">
-                        <ComponentSelectOption
-                            id="ngaySinh"
-                            label="Ngày sinh"
-                            labelOptionNull="Chọn ngày sinh"
-                            options={createNumberOption(1,31)}
-                            onChange={(e) => setDay(e.target.value)}
-                        />
-                        <ComponentSelectOption
-                            id="thangSinh"
-                            label="Tháng Sinh"
-                            labelOptionNull="Chọn tháng sinh"
-                            options={createNumberOption(1,12)}
-                            onChange={(e) => setMonth(e.target.value)}
-                        />
-                        <ComponentSelectOption
-                            id="namSinh"
-                            label="Năm Sinh"
-                            labelOptionNull="Chọn năm sinh"
-                            options={createNumberOption(1950,new Date().getFullYear())}
-                            onChange={(e) => setYear(e.target.value)}
-                        />
-                    </div>
+                    <ComponentInput
+                        id="bir"
+                        label="Ngày Sinh"
+                        readonly
+                        value={formattedBirthday}
+                    />
 
                     <ComponentSelectOption
                         id="major"
