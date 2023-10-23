@@ -38,11 +38,10 @@ const App = () => {
 
   return (
     <>  
-        {auth?.firstLogin && <FirstLogin />}
         <Alert />
         <Routes>
             <Route path='/login' element={<Login />} />
-            <Route path='/' element={auth.user || auth.firstLogin ? <Layout /> : <Login />}>
+            <Route path='/' element={auth?.user ? <Layout /> : auth?.firstLogin ? <FirstLogin studentId={auth.firstLogin.mssv}/> : <Login />}>
                 <Route index element={<Home />} />
                 <Route path='/:page' element={<PageRender />} />
                 <Route path='/:page/:id' element={<PageRender />} />

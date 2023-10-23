@@ -10,17 +10,26 @@ const cookieParser = require('cookie-parser');
 
 const {
     morganType,
-    app: { clientDomain }
+    app: { clientDomain_v1, clientDomain_v2 }
 } = require('./config/config');
 
 const app = express();
-const options = {
-    origin: clientDomain,
+
+// CORS config
+const whitelist = [clientDomain_v1, clientDomain_v2];
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 };
 
 // MiddleWare
-app.use(cors(options));
+app.use(cors(corsOptions));
 app.use(helmet());
 app.use(compression());
 app.use(morgan(morganType));

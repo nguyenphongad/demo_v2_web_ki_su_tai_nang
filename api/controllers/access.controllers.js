@@ -47,7 +47,9 @@ class AccessControllers {
                     res.status(200).send({
                         status: 'Đăng nhập thành công',
                         data: {
-                            firstLogin: true
+                            firstLogin: {
+                                mssv: req.body.studentId
+                            }
                         }
                     });
                 }

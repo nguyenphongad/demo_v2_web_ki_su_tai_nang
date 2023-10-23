@@ -1,7 +1,8 @@
 const dev = {
     app: {
         port: process.env.DEV_APP_PORT || 4000,
-        clientDomain: process.env.DEV_CLIENT_DOMAIN || 'http://localhost:3000'
+        clientDomain_v1: process.env.DEV_CLIENT_DOMAIN_V1 || 'http://localhost:3000',
+        clientDomain_v2: process.env.DEV_CLIENT_DOMAIN_V2 || 'http://localhost:3000'
     },
     morganType: 'dev',
     mongodb: {

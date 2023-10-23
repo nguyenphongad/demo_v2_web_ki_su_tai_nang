@@ -34,7 +34,7 @@ export const login = ({
         console.log(error);
         dispatch({
             type: GLOBALTYPES.ALERT,
-            payload: {error: error.reponse?.data.msg || 'Error Login'}
+            payload: {error: error.reponse?.data.msg || 'Đăng Nhập Thất Bại'}
         })
     }
 }
@@ -66,7 +66,7 @@ export const register = (data) => async(dispatch) => {
         dispatch({
             type: GLOBALTYPES.ALERT,
             payload: {
-                error: "Error Update Student Infomation"
+                error: "Cập Nhật Thông Tin Không Thành Công"
             }
         });
     }
@@ -95,7 +95,7 @@ export const logout = () => async(dispatch) => {
         dispatch({
             type: GLOBALTYPES.ALERT,
             payload: {
-                error: 'Error Logout'
+                error: 'Đăng Xuất Không Thành Công'
             }
         });
     }

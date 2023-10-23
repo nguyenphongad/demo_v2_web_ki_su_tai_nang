@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/actions/authAction";
-import ComponentInput from "../ComponentForm/ComponentInput";
+import ComponentInput from "../ComponentForm/ComponentInput"
 import ComponentButton from "../ComponentButton/ComponentButton";
 import ComponentSelectOption from "../ComponentSelectOption/ComponentSelectOption";
 
@@ -14,20 +14,27 @@ export const createNumberOption = (startNumber, endNumber) => {
     return options;
 }
 
-function FirstLogin() {
+function FirstLogin({studentId}) {
 
     const dispatch = useDispatch();
 
     const [data, setData] = useState({});
-
+    const [day, setDay] = useState(null);
+    const [month, setMonth] = useState(null);
+    const [year, setYear] = useState(null);
     console.log(data);
     const handleChangeData = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
     }
 
+    console.log(`${day}-${month}-${year}`);
     const handleSumbitForm = (e) => {
         e.preventDefault();
-        dispatch(register(data));
+        dispatch(register({
+            ...data,
+            studentId,
+            birthday: `${day}-${month}-${year}`
+        }));
     }
 
     return (
@@ -35,7 +42,6 @@ function FirstLogin() {
             <div className="form__update--info">
                 <form className="">
                     <h1 className="heading__text">Cập Nhật Thông Tin </h1>
-
                     <ComponentInput
                         id="name_sv"
                         label="Tên Sinh Viên"
@@ -44,6 +50,7 @@ function FirstLogin() {
                         placeholder="Nhập tên sinh viên"
                         onChange={handleChangeData}
                     />
+
                     <ComponentInput
                         i="password_new"
                         label="Mật khẩu mới"
@@ -56,40 +63,31 @@ function FirstLogin() {
                         id="msv"
                         label="Mã Sinh Viên"
                         name="studentId"
-                        placeholder="Nhập mã sinh viên"
+                        readonly
+                        value={studentId}
                         onChange={handleChangeData}
                     />
-                    {/* <ComponentInput
-                        label="Ngày Sinh"
-                        type="date"
-                        name="birthday"
-                        onChange={handleChangeData}
-                        className="tr_set__row-birth"
-                    /> */}
                     <div className="tr__line__row--birth">
                         <ComponentSelectOption
                             id="ngaySinh"
-                            name="ngaySinh"
                             label="Ngày sinh"
                             labelOptionNull="Chọn ngày sinh"
                             options={createNumberOption(1,31)}
-                            onChange={handleChangeData}
+                            onChange={(e) => setDay(e.target.value)}
                         />
                         <ComponentSelectOption
                             id="thangSinh"
-                            name="thangSinh"
                             label="Tháng Sinh"
                             labelOptionNull="Chọn tháng sinh"
                             options={createNumberOption(1,12)}
-                            onChange={handleChangeData}
+                            onChange={(e) => setMonth(e.target.value)}
                         />
                         <ComponentSelectOption
                             id="namSinh"
-                            name="namSinh"
                             label="Năm Sinh"
                             labelOptionNull="Chọn năm sinh"
                             options={createNumberOption(1950,new Date().getFullYear())}
-                            onChange={handleChangeData}
+                            onChange={(e) => setYear(e.target.value)}
                         />
                     </div>
 
@@ -99,8 +97,8 @@ function FirstLogin() {
                         label="Ngành học"
                         labelOptionNull="Chọn nghành học"
                         options={[
-                            { labelOption: "Công nghệ thông tin", value: "cntt" },
-                            { labelOption: "Kế Toán", value: "kt" },
+                            { labelOption: "Công nghệ thông tin", value: "Công nghệ thông tin" },
+                            { labelOption: "Kế Toán", value: "Kế Toán" },
                         ]}
                         onChange={handleChangeData}
                     />
@@ -116,8 +114,6 @@ function FirstLogin() {
                         placeholder="Nhập số điện thoại liên hệ"
                         onChange={handleChangeData}
                     />
-
-
 
                     <ComponentButton
                         textButton="Lưu thông tin"

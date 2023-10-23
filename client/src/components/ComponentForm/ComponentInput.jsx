@@ -12,7 +12,8 @@ const ComponentInput = ({
     iconBefore,
     disabled,
     onChange,
-    name
+    name,
+    readonly
 }) => {
     return (
         <div className="component__input">
@@ -27,7 +28,8 @@ const ComponentInput = ({
                         disabled={disabled}
                         onChange={onChange}
                         name={name}
-                        // className={className}
+                        readOnly={readonly}
+                        className={className}
                     />
                     <div className="icon__before">
                         {iconBefore}
