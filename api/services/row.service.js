@@ -5,9 +5,7 @@ class rowService {
     static addRow = async (data) => {
         try {
             const { user, table, page, content } = data;
-
             let rowList = await Row.findOne({ user, table, page });
-
             if (!rowList) {
                 rowList = await Row.create({
                     user,

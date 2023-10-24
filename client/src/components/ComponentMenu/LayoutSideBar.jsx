@@ -9,6 +9,7 @@ import Logo_IUH from '../../assets/logo_iuh.png'
 import {getDataApi} from '../../utils/fetchData';
 import { useDispatch, useSelector } from 'react-redux';
 import { pageSelector } from '../../redux/selector';
+import GLOBALTYPES from '../../redux/actions/globalTypes';
 
 const LayoutSideBar = ({auth}) => {
     const dispatch = useDispatch();
@@ -60,32 +61,7 @@ const LayoutSideBar = ({auth}) => {
             roles: ["0002"],
             icon_before: <BiBookBookmark />,
             submenu: true,
-            sub_menu_item: [
-                {
-                    id: 0,
-                    sub_name_menu: "Tiến độ kế hoạch",
-                    sub_icon_before: "?",
-                    sub_to_link: "/plan"
-                },
-                {
-                    id: 1,
-                    sub_name_menu: "Bằng cấp và chứng chỉ",
-                    sub_icon_before: "?",
-                    sub_to_link: "/degress",
-                },
-                {
-                    id: 2,
-                    sub_name_menu: "Quá trình đào tạo",
-                    sub_icon_before: "?",
-                    sub_to_link: "/traning",
-                },
-                {
-                    id: 3,
-                    sub_name_menu: "Thành tích",
-                    sub_icon_before: "?",
-                    sub_to_link: "/achievements",
-                },
-            ]
+            sub_menu_item: []
         },
         {
             id: 6,
@@ -127,7 +103,17 @@ const LayoutSideBar = ({auth}) => {
             ]
         },
     ];
-
+    
+    if(page.pages) {
+        ARRAY_LIST_MENU[5].sub_menu_item = page.pages.map((page) => {
+            return {
+                id: page._id,
+                sub_name_menu: page.pageName,
+                sub_icon_before: "?",
+                sub_to_link: `/page/${page.pageName}`,
+            }
+        })
+    }
 
     const refBoxSubs = ARRAY_LIST_MENU.map(() => useRef(null));
     const [heightBoxSub, setHeightBoxSub] = useState(ARRAY_LIST_MENU.map(() => "0px"));
@@ -143,6 +129,27 @@ const LayoutSideBar = ({auth}) => {
         setHeightBoxSub(newHeightBoxSub);
     }
 
+    const handleGetPage = async ({pathName}) => {
+        try {
+            const res = await getDataApi(pathName);
+            dispatch({
+                type: GLOBALTYPES.PAGE.DYNAMIC_PAGE_INFO,
+                payload: {
+                    pathName,
+                    pageId: res.data.data?._id,
+                    pageName: res.data.data.pageName,
+                    tables: res.data.data.tables
+                }
+            })
+        } catch (error) {
+            dispatch({
+                type: GLOBALTYPES.ALERT,
+                payload: {
+                    error: 'Cập Nhật Page Thất Bại'
+                }
+            });
+        }
+    }
     useEffect(() => {
         refBoxSubs.forEach((ref, index) => {
             if (ref.current && subMenu[index]) {
@@ -160,20 +167,25 @@ const LayoutSideBar = ({auth}) => {
     useEffect(() => {
         getDataApi('/page')
             .then((res) => {
-                console.log(res.data.data)
                 dispatch({
                     type: GLOBALTYPES.PAGE.GET_DYNAMIC_PAGES,
                     payload: {
                         pages: res.data.data
                     }
                 });
-                // setLoading(false);
             })
             .catch((e) => {
-                console.log(e);
-            });
+                dispatch({
+                    type: GLOBALTYPES.ALERT,
+                    payload: {
+                        error: 'Cập Nhật Menu Thất Bại'
+                    }
+                })
+            })
+
     }, [dispatch]);
 
+   
     const renderArrMenu = ARRAY_LIST_MENU.map((item) => {
         return (
             <React.Fragment key={item.id}>
@@ -223,7 +235,9 @@ const LayoutSideBar = ({auth}) => {
                                                 key={item_sub.id}
                                                 className="sub_menu_item"
                                                 to={item_sub.sub_to_link}
-                                                title={item_sub.sub_name_menu}>
+                                                title={item_sub.sub_name_menu}
+                                                onClick={() => {handleGetPage({pathName: item_sub.sub_to_link})}}
+                                            >
 
                                                 {item_sub.sub_name_menu}
 
@@ -238,7 +252,6 @@ const LayoutSideBar = ({auth}) => {
             </React.Fragment>
         )
     })
-
 
     return (
         <div className='container__menu'>

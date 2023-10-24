@@ -1,95 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import LayoutTable from '../components/ComponentTable/LayoutTable'
+import { useSelector } from 'react-redux'
+import { pageSelector } from '../redux/selector';
 
 const DynamicPage = () => {
-	const DATA_ROW = [
-		{
-			_id: 0,
-			name: 'Tên mục tiêu',
-			type: 'Loại',
-			startDate: '2023-08-22T12:34:56Z',
-			endDate: '2023-10-20T12:34:56Z',
-			complete: true,
-		},
-		{
-			_id: 1,
-			name: 'Tên mục tiêu',
-			type: 'Loại',
-			startDate: '2023-07-12T12:34:56Z',
-			endDate: '2024-09-22T12:34:56Z',
-			complete: true,
-		},
-		{
-			_id: 2,
-			name: 'Tên mục tiêu',
-			type: 'Loại',
-			startDate: '2023-04-20T12:34:56Z',
-			endDate: '2024-01-22T12:34:56Z',
-			complete: true,
-		},
-		{
-			_id: 3,
-			name: 'Tên mục tiêu',
-			type: 'Loại',
-			startDate: '2023-04-20T12:34:56Z',
-			endDate: '2024-01-22T12:34:56Z',
-			complete: true,
-		},
-	]
-	const DATA_TABLE = [
-		{
-			_id: 0,
-			title: 'Lịch trình',
-			thead: [
-				{
-					textHeading: 'STT',
-					value: 1,
-					typeInput: 'text',
-					isShow: true,
-					disabled: true,
-				},
-				{
-					textHeading: 'Tên mục tiêu',
-					typeInput: 'text',
-					isShow: true,
-				},
-				{
-					textHeading: 'Loại',
-					typeInput: 'text',
-					isShow: true,
-				},
-				{
-					textHeading: 'Thời gian còn',
-					typeInput: 'date',
-					isShow: false,
-				},
-				{
-					textHeading: 'Ngày bắt đầu',
-					typeInput: 'date',
-					isShow: true,
-				},
-				{
-					textHeading: 'Ngày hoàn thành',
-					typeInput: 'date',
-					isShow: true,
-				},
-				{
-					textHeading: 'Trạng thái',
-					typeInput: 'text',
-					isShow: true,
-				},
-			],
-		},
-	]
+    const page = useSelector(pageSelector);
+    const [tables, setTables] = useState([]);
+
+    useEffect(() => {
+        if(page.tables) {
+            const arr = page.tables.map((table) => {
+                const TABLE = {};
+                TABLE.tableId = table._id;
+                TABLE.title = table.tableName;
+                TABLE.thead = table.rowTitleList.map((rowTitle) => {
+                    return {
+                        textHeading: rowTitle,
+                        typeInput: 'text',
+					    isShow: true,
+                    }
+                })
+
+                if(table?.rowValueList) {
+                    TABLE.tbody = table?.rowValueList.content.map((row) => {
+                        return JSON.parse(row.replace(/'/g, '"'));
+                     })
+                } 
+               
+                return TABLE
+            })
+            setTables(arr);
+        }
+    }, [page?.pageName]);
 
 	return (
 		<div className="container__plan">
-			{DATA_TABLE.map((item, index) => {
+			{tables.map((table, index) => {
 				return (
 					<LayoutTable
 						key={index}
-						title={item.title}
-						thead={item.thead}
+						table={table}
+                        page={page}
 					></LayoutTable>
 				)
 			})}

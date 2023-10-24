@@ -13,9 +13,13 @@ import Alert from './components/ComponentToast/Alert';
 import FirstLogin from './components/ComponentFirstLogin/FirstLogin';
 import GLOBALTYPES from './redux/actions/globalTypes';
 import { getLogged } from './utils/handleLogged';
+import { getDataApi } from './utils/fetchData';
+
 const App = () => {
     const dispatch = useDispatch();
     const auth = useSelector(authSelector);
+    console.log(auth?.user?.roles.includes("0004") && auth?.user?.roles.includes("0003"));
+
     const location = useLocation();
     const pathName = location.pathname;
 
@@ -23,11 +27,13 @@ const App = () => {
         if(auth?.user || getLogged()) {
             dispatch(verifyAccessToken());
             if (pathName.includes('/page/')) {
-                getDataApi(`${decodeURI(pathName)}`)
+                getDataApi(pathName)
                     .then((res) => {
                         dispatch({
                             type: GLOBALTYPES.PAGE.DYNAMIC_PAGE_INFO,
                             payload: {
+                                pathName, 
+                                pageId: res.data.data?._id,
                                 pageName: res.data.data?.pageName,
                                 tables: res.data.data.tables
                             }
@@ -37,7 +43,7 @@ const App = () => {
                         dispatch({
                             type: GLOBALTYPES.ALERT,
                             payload: {
-                                error: 'Chuyển Trang Thất Bại'
+                                error: 'Lấy Dữ Liệu Page Thất Bại'
                             }
                         })
                     });

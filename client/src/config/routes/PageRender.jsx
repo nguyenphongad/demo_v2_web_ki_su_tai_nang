@@ -13,18 +13,28 @@ function PageRender() {
 		: page?.replace(/\w/, page?.charAt(0).toUpperCase())
 
 	useEffect(() => {
-		import(/* @vite-ignore */ `../../pages/${pageName}`)
+        if (pathName.includes('/page/')) {
+            import(/* @vite-ignore */ '../../pages/DynamicPage')
 			.then((module) => {
                 setPageComponent(module);
 			})
 			.catch((e) => {
 				setPageComponent(NotFound);
 			});
+        } else {
+            import(/* @vite-ignore */ `../../pages/${pageName}`)
+			.then((module) => {
+                setPageComponent(module);
+			})
+			.catch((e) => {
+				setPageComponent(NotFound);
+			});
+        }		
 	}, [page, id, setPageComponent]);
 
 	if(PageComponent) {
         const Component = PageComponent.default;
-        return <Component />;
+        return <Component/>;
     };
 
     return null;

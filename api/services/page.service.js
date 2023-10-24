@@ -30,8 +30,9 @@ class PageService {
         }
     };
 
-    static getPage = async ({ pageName }) => {
+    static getPage = async ({ pageName, userId }) => {
         try {
+            console.log(userId);
             const page = await Page.findOne({ pageName })
                 .populate({
                     path: 'tables',

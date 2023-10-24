@@ -3,6 +3,7 @@ import GLOBALTYPES from '../actions/globalTypes';
 const initialState = {
     pages: [],
     pathName: '',
+    pageId: '',
     pageName: '',
     tables: []
 };
@@ -15,14 +16,11 @@ function pageReducer(state = initialState, action) {
                 pages: [...action.payload.pages]
             };
         }
-        case GLOBALTYPES.PAGE.SET_DYNAMIC_PAGE:
-            return {
-                ...state,
-                pathName: action.payload.pathName
-            };
         case GLOBALTYPES.PAGE.DYNAMIC_PAGE_INFO:
             return {
                 ...state,
+                pathName: action.payload.pathName,
+                pageId: action.payload.pageId,
                 pageName: action.payload.pageName,
                 tables: [...action.payload.tables]
             };

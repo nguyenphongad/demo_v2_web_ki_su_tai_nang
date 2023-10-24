@@ -6,7 +6,7 @@ class PageControllers {
             const createdPage = await pageService.createPage(req.body);
 
             res.status(201).json({
-                status: 'create page successful',
+                status: 'Tạo Page Mới Thành Công',
                 data: createdPage
             });
         } catch (error) {
@@ -18,7 +18,7 @@ class PageControllers {
         try {
             const pages = await pageService.getAllPage();
             res.status(200).json({
-                status: 'get pages successful',
+                status: 'Lấy Toàn Bộ Page Thành Công',
                 data: pages || []
             });
         } catch (error) {
@@ -31,6 +31,7 @@ class PageControllers {
         const page = await pageService.getPage({ pageName: req.params.page });
         try {
             res.status(200).json({
+                status: 'Lấy Dữ Liệu Page Thành Công',
                 data: page
             });
         } catch (error) {
