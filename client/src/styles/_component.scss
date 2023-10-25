@@ -57,7 +57,7 @@
             align-items: center;
 
             .box_search {
-                height: 35px;
+                height: 33px;
 
                 svg {
                     color: #6b6b6b;
@@ -185,6 +185,13 @@
                     }
                 }
             }
+            .border__text--role{
+                padding: 5px 8px;
+                border: 2px solid red;
+                color: red;
+                border-radius: 10px;
+                font-weight: 500;
+            }
         }
     }
 }
@@ -301,6 +308,20 @@
         }
     }
 }
+.background_admin{
+    background-color: #313A46;
+    .item_menu_a{
+        background-color: #313A46 !important;
+        color: #ffffff !important;
+    }
+    .item_menu_a.active {
+        background-color: #525a64 !important;
+        // color: $color_black;
+    }
+}
+
+
+
 
 .component__input {
     > label {
@@ -466,4 +487,28 @@
 
 .unactive__modal {
     display: none;
+}
+
+
+
+
+
+.padding__box{
+    padding: 20px;
+}
+.flex__line{
+    display: flex;
+    justify-content: center;
+}
+.css__test{
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    >span{
+        width: 100px;
+        display: block;
+        margin:10px 15px;
+        border:1px solid;
+    }
 }

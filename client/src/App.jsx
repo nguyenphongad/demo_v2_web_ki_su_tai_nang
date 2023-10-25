@@ -14,11 +14,12 @@ import FirstLogin from './components/ComponentFirstLogin/FirstLogin';
 import GLOBALTYPES from './redux/actions/globalTypes';
 import { getLogged } from './utils/handleLogged';
 import { getDataApi } from './utils/fetchData';
+import NotFound from './pages/NotFound';
 
 const App = () => {
     const dispatch = useDispatch();
     const auth = useSelector(authSelector);
-    console.log(auth?.user?.roles.includes("0004") && auth?.user?.roles.includes("0003"));
+    // console.log(auth?.user?.roles.includes("0004") && auth?.user?.roles.includes("0003"));
 
     const location = useLocation();
     const pathName = location.pathname;
@@ -63,7 +64,7 @@ const App = () => {
                 <Route path='/:page' element={<PageRender />} />
                 <Route path='/:page/:id' element={<PageRender />} />
                 <Route path='/page/:dynamicPage' element={<PageRender />} />
-                <Route path='*' element={<PageRender />} />
+                <Route path='*' element={<NotFound />} />
             </Route>
         </Routes>
     </>

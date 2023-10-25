@@ -29,7 +29,7 @@ const ComponentInput = ({
                         onChange={onChange}
                         name={name}
                         readOnly={readonly}
-                        className={className}
+                        // className={className}
                     />
                     <div className="icon__before">
                         {iconBefore}

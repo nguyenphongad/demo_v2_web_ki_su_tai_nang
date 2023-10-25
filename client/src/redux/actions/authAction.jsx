@@ -89,7 +89,7 @@ export const logout = () => async(dispatch) => {
         });
 
         removeLogged();
-        window.location.reload();
+        window.location.href = '/';
     } catch (error) {
         dispatch({
             type: GLOBALTYPES.ALERT,

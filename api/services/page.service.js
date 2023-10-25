@@ -4,6 +4,7 @@ class PageService {
     static createPage = async (data) => {
         try {
             const { pageName, tableName, tableDescription, rowTitleList } = data;
+            console.log({ pageName, tableName, tableDescription, rowTitleList });
 
             const createdPage = await Page.create({
                 pageName,
@@ -14,7 +15,7 @@ class PageService {
                         rowTitleList
                     }
                 ]
-            }).lean();
+            });
             return createdPage;
         } catch (error) {
             throw error;
@@ -36,7 +37,12 @@ class PageService {
             const page = await Page.findOne({ pageName })
                 .populate({
                     path: 'tables',
-                    populate: { path: 'rowValueList', model: 'row', select: 'content' }
+                    populate: {
+                        path: 'rowValueList',
+                        model: 'row',
+                        select: 'content',
+                        match: { user: userId }
+                    }
                 })
                 .lean();
             return page;

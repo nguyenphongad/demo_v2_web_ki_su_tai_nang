@@ -1,7 +1,9 @@
-import {useState} from 'react';
-import { postDataApi } from '../utils/fetchData';
+import { useState } from 'react';
+import { createPage } from '../redux/actions/pageAction';
+import { useDispatch } from 'react-redux';
 
 function CreatePages() {
+    const dispatch = useDispatch();
     const [rowTitleList, setRowTitleList] = useState([]);
     const [titleRowValue, setTitleRowValue] = useState('');
     const [titleTable, setTitleTable] = useState('');
@@ -20,22 +22,12 @@ function CreatePages() {
     };
 
     const handleCreatePage = async () => {
-        try {
-            const res = await postDataApi('/page', {
-                pageName: pageNameValue,
-                tableName: titleTable,
-                tableDescription: descriptionTable,
-                rowTitleList
-            });
-            console.log(res.data);
-        } catch (error) {
-            console.log(error);
-        }
+        dispatch(createPage({ pageNameValue, titleTable, descriptionTable, rowTitleList }));
     };
 
     return (
         <div>
-            <div>
+            <div className='padding__box'>
                 <h3>Tên Page</h3>
                 <input
                     type='text'
@@ -82,12 +74,19 @@ function CreatePages() {
                 </button>
             </div>
             <div className='mt-10'>
-                <h1 className='font-bold text-3xl'>{pageNameValue || ""}</h1>
-                <h1 className='font-bold text-2xl'>{titleTable || ""}</h1>
-                <h3 className='font-light text-sm text-gray-3000'>
-                    {descriptionTable ? '(' + descriptionTable + ')' : ''}
-                </h3>
-                <div className='mt-5 flex row flex-wrap'>
+                <div className="flex__line">
+                    Tên Page:
+                    <h1 className='font-bold text-3xl'>{pageNameValue || ""}</h1>
+                    Tên bảng:
+                    <h1 className='font-bold text-2xl'>{titleTable || ""}</h1>
+                    Mô tả bảng :
+                    <h3 className='font-light text-sm text-gray-3000'>
+                        {descriptionTable ? '(' + descriptionTable + ')' : ''}
+                    </h3>
+                </div>
+                
+                <div className='mt-5 flex row flex-wrap css__test'>
+                    Cột :
                     {rowTitleList.map((rowTitle, index) => (
                         <span key={index} className='px-5 py-1 bg-gray-300 m-0.5'>
                             {rowTitle}

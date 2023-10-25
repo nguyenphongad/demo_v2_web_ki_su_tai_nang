@@ -1,19 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom';
-import { BiBookBookmark, BiHomeSmile, BiMessageSquareDetail} from 'react-icons/bi';
+import { BiBookBookmark, BiHomeSmile, BiMessageSquareDetail } from 'react-icons/bi';
 import { HiOutlineNewspaper } from 'react-icons/hi'
 import { BsFillCaretRightFill } from 'react-icons/bs'
-import {TbTargetArrow} from 'react-icons/tb';
-import { MdLightbulbOutline, MdOutlineCreate} from 'react-icons/md';
+import { TbTargetArrow } from 'react-icons/tb';
+import { MdLightbulbOutline, MdOutlineCreate } from 'react-icons/md';
 import Logo_IUH from '../../assets/logo_iuh.png'
-import {getDataApi} from '../../utils/fetchData';
+import Logo_IUH_color_w from '../../assets/logo_iuh_color_w.png'
+import { getDataApi } from '../../utils/fetchData';
 import { useDispatch, useSelector } from 'react-redux';
 import { pageSelector } from '../../redux/selector';
 import GLOBALTYPES from '../../redux/actions/globalTypes';
 
-const LayoutSideBar = ({auth}) => {
+const LayoutSideBar = ({ auth }) => {
     const dispatch = useDispatch();
     const page = useSelector(pageSelector);
+
+    const determineAuth = auth?.user?.roles.includes("0004") || auth?.user?.roles.includes("0003")
 
     const ARRAY_LIST_MENU = [
         {
@@ -103,8 +106,8 @@ const LayoutSideBar = ({auth}) => {
             ]
         },
     ];
-    
-    if(page.pages) {
+
+    if (page.pages) {
         ARRAY_LIST_MENU[5].sub_menu_item = page.pages.map((page) => {
             return {
                 id: page._id,
@@ -129,7 +132,7 @@ const LayoutSideBar = ({auth}) => {
         setHeightBoxSub(newHeightBoxSub);
     }
 
-    const handleGetPage = async ({pathName}) => {
+    const handleGetPage = async ({ pathName }) => {
         try {
             const res = await getDataApi(pathName);
             dispatch({
@@ -185,83 +188,83 @@ const LayoutSideBar = ({auth}) => {
 
     }, [dispatch]);
 
-   
+
     const renderArrMenu = ARRAY_LIST_MENU.map((item) => {
         return (
             <React.Fragment key={item.id}>
-                {item.allow || item.roles.some(role => auth.user.roles.includes(role)) ? 
-                <>
-                    {
-                        item.submenu ?
-                            <div
-                                key={item.id}
-                                className="item_menu_a"
-                                onClick={() => handleSubMenu(item.id)}
-                            >
-                                <span>
-                                    {item.icon_before}
-                                    {item.name_menu}
-                                </span>
-                                <div className={`icon_active_sub ${subMenu[item.id] ? "active_icon" : "unactive_icon"}`}>
-                                    <BsFillCaretRightFill />
+                {item.allow || item.roles.some(role => auth.user.roles.includes(role)) ?
+                    <>
+                        {
+                            item.submenu ?
+                                <div
+                                    key={item.id}
+                                    className="item_menu_a"
+                                    onClick={() => handleSubMenu(item.id)}
+                                >
+                                    <span>
+                                        {item.icon_before}
+                                        {item.name_menu}
+                                    </span>
+                                    <div className={`icon_active_sub ${subMenu[item.id] ? "active_icon" : "unactive_icon"}`}>
+                                        <BsFillCaretRightFill />
+
+                                    </div>
 
                                 </div>
+                                :
+                                <NavLink
+                                    key={item.id}
+                                    className="item_menu_a"
+                                    to={item.to_link}
+                                >
+                                    <span>
+                                        {item.icon_before}
+                                        {item.name_menu}
+                                    </span>
 
-                            </div>
-                            :
-                            <NavLink
-                                key={item.id}
-                                className="item_menu_a"
-                                to={item.to_link}
-                            >
-                                <span>
-                                    {item.icon_before}
-                                    {item.name_menu}
-                                </span>
+                                </NavLink>
+                        }
 
-                            </NavLink>
-                    }
+                        {
+                            item.submenu ?
+                                <div
+                                    className='box_sub_menu_item'
+                                    ref={refBoxSubs[item.id]}
+                                    style={{ height: `${subMenu[item.id] ? heightBoxSub[item.id] : "0px"}` }}>
+                                    {
+                                        item.sub_menu_item.map((item_sub) => {
+                                            return (
+                                                <NavLink
+                                                    key={item_sub.id}
+                                                    className="sub_menu_item"
+                                                    to={item_sub.sub_to_link}
+                                                    title={item_sub.sub_name_menu}
+                                                    onClick={() => { handleGetPage({ pathName: item_sub.sub_to_link }) }}
+                                                >
 
-                    {
-                        item.submenu ?
-                            <div
-                                className='box_sub_menu_item'
-                                ref={refBoxSubs[item.id]}
-                                style={{ height: `${subMenu[item.id] ? heightBoxSub[item.id] : "0px"}` }}>
-                                {
-                                    item.sub_menu_item.map((item_sub) => {
-                                        return (
-                                            <NavLink
-                                                key={item_sub.id}
-                                                className="sub_menu_item"
-                                                to={item_sub.sub_to_link}
-                                                title={item_sub.sub_name_menu}
-                                                onClick={() => {handleGetPage({pathName: item_sub.sub_to_link})}}
-                                            >
+                                                    {item_sub.sub_name_menu}
 
-                                                {item_sub.sub_name_menu}
-
-                                            </NavLink>
-                                        )
-                                    })
-                                }
-                            </div>
-                        : undefined
-                     }
-                </> : null}
+                                                </NavLink>
+                                            )
+                                        })
+                                    }
+                                </div>
+                                : undefined
+                        }
+                    </> : null}
             </React.Fragment>
         )
     })
 
     return (
-        <div className='container__menu'>
+        <div className={`container__menu  ${determineAuth ? "background_admin" : ""}`}>
             <div className='img__logo'>
                 <a href="/">
-                    <img src={Logo_IUH} alt="logo_iuh" />
+                    <img src={determineAuth ? Logo_IUH_color_w :Logo_IUH} alt="logo_iuh" />
                 </a>
             </div>
             <div className="wrap__menu">
-                <div className="flex__box">
+                <div className={`flex__box`}>
                     {renderArrMenu}
                 </div>
             </div>
